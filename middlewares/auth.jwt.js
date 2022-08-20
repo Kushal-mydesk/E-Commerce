@@ -25,12 +25,14 @@ const verifyToken = (req,res,next) => {
 
             //Fetch the userId ffrom token and set it to the request object
 
-            req.user_name = user.id;
+            req.user_name = user.user_name;
             next();
         }) 
     
 }
 
 
-
+module.exports = {
+    verifyToken : verifyToken
+};
 

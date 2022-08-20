@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
 const User = require("./models/user.model");
+const Address = require("./models/address.model");
 
 const bodyPareser = require("body-parser");
 app.use(bodyPareser.json());
@@ -31,18 +32,21 @@ db.on('error' , () => {
 db.once("open", () => {
     console.log("Connected to Database");
     //init();
+    
 })
 
 
 /**Pluggin the routes */
 
 require("./routes/auth.route")(app);
+require("./routes/address.route")(app);
 
 
 
-
+//this init function is called on 'once()' of instance 'db', 
+//and this should be called to pre-store ADMIN on DB
 async function init(){
-    /**We should on ADMIN user from the database */
+    /**We should add ADMIN user from the database */
 
     const user = await User.create({
         first_name :  "Admin",
@@ -54,6 +58,7 @@ async function init(){
         role: "ADMIN"
     });
     console.log(user);
+   
 }
 
 app.listen(server_config.PORT, () => {
