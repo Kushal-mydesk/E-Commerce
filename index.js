@@ -8,6 +8,8 @@ const db_config = require("./configs/db.config");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
+const User = require("./models/user.model");
+
 const bodyPareser = require("body-parser");
 app.use(bodyPareser.json());
 
@@ -28,12 +30,31 @@ db.on('error' , () => {
 
 db.once("open", () => {
     console.log("Connected to Database");
+    //init();
 })
 
 
 /**Pluggin the routes */
 
 require("./routes/auth.route")(app);
+
+
+
+
+async function init(){
+    /**We should on ADMIN user from the database */
+
+    const user = await User.create({
+        first_name :  "Admin",
+        last_name: "One",
+        user_name : "admin101",
+        password : bcrypt.hashSync("Welcome1",8),
+        email : "admin@admin101.com",
+        phone_number : 9809085874,
+        role: "ADMIN"
+    });
+    console.log(user);
+}
 
 app.listen(server_config.PORT, () => {
     console.log("Server running on port " + server_config.PORT);

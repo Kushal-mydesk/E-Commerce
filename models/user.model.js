@@ -31,7 +31,8 @@ const user_schema = new mongoose.Schema({
     },
     phone_number:{
         type: Number,
-        required: true
+        required: true,
+        maxLength: 10
     },
     role:{
         type:String,

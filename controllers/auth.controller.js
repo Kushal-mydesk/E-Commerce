@@ -31,13 +31,60 @@ exports.signup = async(req,res) =>{
         }
 
 
-        res.status(201).send(postRes)
+        res.status(201).send(postRes);
 
     }catch(err){
         console.log("Error while registering the user",err.message);
         res.status(500).send({
             message : "some Internal Server Error"
         });
+    }
+
+}
+
+
+exports.login = async(req,res) => {
+
+
+    try{
+        const useremailFromReq = req.body.email;
+        const password = req.body.password;
+
+        const userSaved = await User.findOne({email : useremailFromReq});
+        if(!userSaved){
+            return res.status(401).send({
+                message: "Email Address is not registered"
+            });
+        }
+
+
+        const isValidPassword = bcrypt.compareSync(password,userSaved.password);
+
+        if(!isValidPassword){
+            return res.status(401).send({
+                message: "Invalid Credentials"
+            })
+        }
+        const token = jwt.sign({
+            user_name : userSaved.user_name,
+        },auth_config.secret,{
+            expiresIn : 600
+        })
+
+        res.status(200).send({
+            email: userSaved.email,
+            name: userSaved.first_name + " " + userSaved.last_name,
+            isAuthenticated: true,
+            access_token: token
+        })
+
+
+    }catch(err){
+        console.log("Error while authenticating the user",err.message);
+        res.status(500).send({
+            message : "some Internal Server Error"
+        });
+
     }
 
 }
