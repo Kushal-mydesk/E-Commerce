@@ -31,8 +31,23 @@ const verifyToken = (req,res,next) => {
     
 }
 
+const isAdmin = async(req,res,next) => {
+
+    const user = await User.findOne({user_name: req.user_name});
+
+    if(user && user.role == "ADMIN"){
+        next();
+    }else{
+        return res.status(403).send({
+            message : "Only Admin is allowed to access"
+        })
+    }
+
+}
+
 
 module.exports = {
-    verifyToken : verifyToken
+    verifyToken : verifyToken,
+    isAdmin : isAdmin
 };
 
