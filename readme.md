@@ -3,7 +3,7 @@ This Code is For the Graded Project
 # Port : 
     The Port Number is on the server.config file in "configs" folder, Its 8080
 
-## "dependencies": 
+## Dependencies: 
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
