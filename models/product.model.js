@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-
 const product_schema = new mongoose.Schema({
 
     name:{
@@ -30,6 +29,19 @@ const product_schema = new mongoose.Schema({
     manufacturer:{
         type:String,
         required: true,
+    },
+    createdAt: {
+        type: Date,
+        default : () => {
+            return new Date();
+        },
+        immutable : true,
+    },
+    updatedAt : {
+        type:  Date,
+        default : () => {
+            return new Date();
+        }
     }
 
 

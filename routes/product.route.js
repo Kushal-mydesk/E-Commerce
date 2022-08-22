@@ -6,7 +6,6 @@ const product_controller = require("../controllers/product.controller");
 module.exports = (app) => {
 
     //This is the route for creating the Product with POST call
-
     app.post("/eshop/api/v1/products",[auth.verifyToken,auth.isAdmin], product_controller.createProduct)
 
 
@@ -16,4 +15,9 @@ module.exports = (app) => {
 
     // this is the route for getting the product by id
     app.get("/eshop/api/v1/products/:id", product_controller.getProductById);
+
+    //This will be route for updating the product
+    app.put("/eshop/api/v1/products/:id",[auth.verifyToken,auth.isAdmin,auth.isAdmin], product_controller.updateById);
+
+    app.delete("/eshop/api/v1/products/:id",[auth.verifyToken,auth.isAdmin],product_controller.deleteProductById);
 }
