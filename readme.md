@@ -15,7 +15,7 @@ This Code is For the Graded Project
 ### Here are the Routes For Every Activity
 * Routes for Authentication Activity
 
-    <p>//This is the route for sign in the users with POST call</p>
+    <p>//This is the route for creating the users with POST call</p>
     <p>"/eshop/api/v1/signup/users"   with Post call</p>
 
     <p>//this will be the route for sign in the users with POST call</p>
