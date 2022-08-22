@@ -1,7 +1,7 @@
 This Code is For the Graded Project
 
 # Port : 
-    <p>The Port Number is on the server.config file in "configs" folder, Its 8080</p>
+    The Port Number is on the server.config file in "configs" folder, Its 8080
 
 ## "dependencies": 
     "bcrypt": "^5.0.1",
